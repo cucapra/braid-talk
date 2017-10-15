@@ -14,3 +14,7 @@ Alternatively, you can set the `BRAID` environment variable to a place where Bra
 Get the assets for the talk into place:
 
     $ make
+
+Get the dependencies for the talk:
+
+    $ yarn  # or npm install
