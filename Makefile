@@ -1,16 +1,15 @@
 BRAID := braid
 DINGUS := $(BRAID)/dingus
 RESOURCES := ssc.bundle.js dingus.css codemirror.css
-REVEAL := node_modules/reveal.js/package.json
 
 .PHONY: all
-all: $(RESOURCES:%=rsrc/%) $(REVEAL)
+all: $(RESOURCES:%=rsrc/%) node_modules
 
 rsrc/%: $(DINGUS)/%
 	@mkdir -p rsrc
 	cp $< $@
 
-$(REVEAL):
+node_modules:
 	yarn
 
 # For building the dingus itself, from which we get our resources.
