@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="rsrc/dingus.css">
   <link rel="stylesheet" href="rsrc/codemirror.css">
   <link rel="stylesheet" href="talk.css">
-  <link rel="stylesheet" href="node_modules/highlight.js/src/styles/github-gist.css">
+  <link rel="stylesheet" href="node_modules/highlight.js/styles/github-gist.css">
 
   <script src="node_modules/headjs/dist/1.0.0/head.min.js"></script>
 </head>
@@ -32,6 +32,35 @@
     <img src="img/artifacts_available.jpg" width="128" height="128">
     <img src="img/artifacts_evaluated_functional.jpg" width="128" height="128">
   </div>
+</section>
+
+<section data-example="webgl">
+  <script type="text/example" data-preamble="1">
+var model = mat4.create();
+
+# Load buffers and parameters for the model.
+var mesh = load_obj("bunny.obj");
+var position = mesh_positions(mesh);
+var normal = mesh_normals(mesh);
+var indices = mesh_indices(mesh);
+var size = mesh_size(mesh);
+
+var model = mat4.create();
+mat4.scale(model, model, vec3(8.0, 8.0, 8.0));
+  </script>
+  <script type="text/example">
+render js<
+ vertex glsl<
+  gl_Position = projection * view *
+   model * vec4(position, 1.0);
+  fragment glsl<
+   gl_FragColor =
+    vec4(abs(normal), 1.0);
+  >
+ >;
+ draw_mesh(indices, size);
+>
+  </script>
 </section>
 
 <script src="node_modules/reveal.js/js/reveal.js"></script>
