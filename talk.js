@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     history: true,
     dependencies: [
       {
-        'src': 'bower_components/reveal.js/plugin/highlight/highlight.js',
+        'src': 'node_modules/reveal.js/plugin/highlight/highlight.js',
         async: true,
         callback: function () {
           hljs.configure({
