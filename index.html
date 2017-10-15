@@ -63,6 +63,29 @@ render js<
   </script>
 </section>
 
+<!-- The dingus DOM, which gets reused on all code slides. -->
+<div class="sscdingus">
+  <div class="input">
+      <textarea class="code"></textarea>
+  </div>
+
+  <div class="arrow">
+    &raquo;
+  </div>
+
+  <div class="output">
+      <div class="error"></div>
+      <div class="primary">
+        <pre class="result"></pre>
+        <div class="visual"></div>
+        <div class="fps"></div>
+      </div>
+      <div class="secondary">
+        <pre class="compiled"></pre>
+      </div>
+  </div>
+</div>
+
 <script src="node_modules/reveal.js/js/reveal.js"></script>
 <script src="rsrc/ssc.bundle.js"></script>
 <script src="talk.js"></script>
