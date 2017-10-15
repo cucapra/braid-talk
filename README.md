@@ -18,3 +18,11 @@ Get the assets for the talk into place:
 Get the dependencies for the talk:
 
     $ yarn  # or npm install
+
+Start a Web server to view the talk. For example:
+
+    $ python3 -m http.server
+
+Or:
+
+    $ devd .
