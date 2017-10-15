@@ -1,0 +1,107 @@
+.reveal h1, .reveal h2, .reveal h3 {
+  text-align: left;
+  text-transform: none;
+  color: #51a012;
+}
+
+.reveal h4 {
+  text-align: left;
+  text-transform: none;
+}
+
+.reveal h1 {
+  line-height: 90%;
+}
+
+.reveal .title h2 {
+  color: black;
+}
+
+.reveal section img {
+  border: none;
+  box-shadow: none;
+}
+
+.reveal section.image img {
+  width: 100%;
+}
+
+.reveal pre {
+  box-shadow: none;
+  font-size: 0.8em;
+}
+
+.reveal pre code {
+  /* This is set to 400px in the default stylesheet! For shame! */
+  max-height: none;
+}
+
+.reveal section p {
+  text-align: left;
+}
+
+.sscdingus {
+  top: 2rem;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  z-index: 2;
+}
+.sscdingus .code, .sscdingus .CodeMirror {
+  font-size: 3rem;
+  height: auto;
+}
+.sscdingus .result {
+  font-size: 5rem;
+  margin: 0;
+  white-space: pre-wrap;
+}
+.sscdingus .error {
+  font-size: 3em;
+  color: #666;
+  font-family: monospace;
+}
+.sscdingus .compiled {
+  font-size: 2rem;
+  overflow: hidden;
+  white-space: pre-wrap;
+}
+.sscdingus .visual {
+  width: 45vw;
+  height: 80vh;
+}
+.sscdingus .fps {
+  visibility: hidden;
+}
+
+/* Dingus layout in columns. */
+.sscdingus .input, .sscdingus .output, .sscdingus .arrow {
+  float: left;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.sscdingus .input, .sscdingus .output {
+  width: calc(50% - 35px);
+}
+.sscdingus .arrow {
+  width: 70px;
+
+  font-size: 7rem;
+  font-weight: bold;
+  color: #51a012;
+  margin-top: -0.5rem;
+}
+
+/* Special style for GL mode. */
+/*
+.sscdingus.webgl .CodeMirror {
+  font-size: 2rem;
+}
+*/
+.sscdingus.webgl .input {
+  width: calc(60% - 35px);
+}
+.sscdingus.webgl .output {
+  width: calc(40% - 35px);
+}
