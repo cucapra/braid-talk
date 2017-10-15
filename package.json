@@ -1,0 +1,10 @@
+{
+  "name": "braid-talk",
+  "version": "0.0.0",
+  "author": "Adrian Sampson <asampson@cs.cornell.edu>",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "reveal.js": "^3.5.0"
+  }
+}
