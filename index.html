@@ -117,6 +117,38 @@ var x = 2;
 <!-- Add ! to show result of executing the opaque value. -->
 <!-- Perhaps show splicing being combined? -->
 
+<!-- TODO Introduce backend annotations? -->
+
+<section data-example="webgl">
+  <script type="text/example" data-preamble="1">
+# Load buffers and parameters for the model.
+var mesh = load_obj("teapot.obj");
+var position = mesh_positions(mesh);
+var normal = mesh_normals(mesh);
+var indices = mesh_indices(mesh);
+var size = mesh_size(mesh);
+
+# Position the model.
+var model = mat4.create();
+mat4.translate(model, model, vec3(0.0, -4.0, 0.0));
+mat4.scale(model, model, vec3(0.3, 0.3, 0.3));
+mat4.rotateX(model, model, -1.0);
+  </script>
+  <script type="text/example">
+render js<
+  var tr = projection * view * model;
+  vertex glsl<
+    gl_Position = tr * vec4(position, 1.0);
+    fragment glsl<
+      gl_FragColor = vec4(0.32, 0.63, 0.07, 1.0);
+    >
+  >;
+  draw_mesh(indices, size);
+>
+  </script>
+</section>
+<!-- Change the colors to abs(normal). -->
+
 </div>
 </div>
 
