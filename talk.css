@@ -75,8 +75,11 @@ body {
   overflow: hidden;
   white-space: pre-wrap;
 }
+.sscdingus .primary {
+  width: 100%;
+}
 .sscdingus .visual {
-  width: 45vw;
+  width: 100%;
   height: 80vh;
 }
 .sscdingus .fps {
@@ -105,14 +108,12 @@ body {
 }
 
 /* Special style for GL mode. */
-/*
 .sscdingus.webgl .CodeMirror {
   font-size: 2rem;
 }
-*/
 .sscdingus.webgl .input {
-  width: calc(45% - 35px);
+  width: calc(65% - 35px);
 }
 .sscdingus.webgl .output {
-  width: calc(55% - 35px);
+  width: calc(35% - 35px);
 }
