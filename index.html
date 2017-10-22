@@ -56,21 +56,21 @@ render js<
 </section>
 
 <section data-example="interp">
-  <h1>Quote</h1>
+  <h2>Quote</h2>
   <script type="text/example">
 < 2 * 2 * 2 >
   </script>
 </section>
 
 <section data-example="interp">
-  <h1>Run</h1>
+  <h2>Run</h2>
   <script type="text/example">
 !< 2 * 2 * 2 >
   </script>
 </section>
 
 <section data-example="interp">
-  <h1>Splice</h1>
+  <h2>Splice</h2>
   <script type="text/example">
 var x = <2>;
 !< [x] * 2 * 2 >
@@ -79,7 +79,7 @@ var x = <2>;
 <!-- Then remove the ! to show the code itself. -->
 
 <section data-example="interp">
-  <h1>Types for code</h1>
+  <h2>Types for code</h2>
   <script type="text/example">
 def square(x: <Int>)
   < [x] * [x] >;
@@ -98,7 +98,7 @@ square(<3>)
 <!-- TODO Semantics here? -->
 
 <section data-example="interp">
-  <h1>Communication through literals</h1>
+  <h2>Communication through literals</h2>
   <script type="text/example">
 var x = 2;
 < [x] * 21 >
@@ -107,8 +107,10 @@ var x = 2;
 <!-- Change 2 to <2> to show lifting. -->
 
 <section data-example="interp">
-  <h3>Our new construct:<h3>
-  <h1>Materialization</h1>
+  <h2>
+    Our new construct:<br>
+    Materialization
+  </h2>
   <script type="text/example">
 var x = 2;
 < %[x] * 21 >
@@ -118,6 +120,16 @@ var x = 2;
 <!-- Perhaps show splicing being combined? -->
 
 <!-- TODO Introduce backend annotations? -->
+
+<section>
+  <h2>Backend annotations</h2>
+  <p>
+    <code>js&lt;...&gt;</code>: Emit JavaScript for the CPU.
+  </p>
+  <p>
+    <code>glsl&lt;...&gt;</code>: Emit GLSL for GPU shaders.
+  </p>
+</section>
 
 <section data-example="webgl">
   <script type="text/example" data-preamble="1">
