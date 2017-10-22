@@ -89,6 +89,34 @@ square(<3>)
 <!-- Then *add* a ! to show that the code value "works." -->
 <!-- Then change one to a string to show a type error. -->
 
+<section>
+  <h4>
+    Multi-stage programming guarantees that
+    <strong>any generated program will be well-typed.</strong>
+  </h4>
+</section>
+<!-- TODO Semantics here? -->
+
+<section data-example="interp">
+  <h1>Communication through literals</h1>
+  <script type="text/example">
+var x = 2;
+< [x] * 21 >
+  </script>
+</section>
+<!-- Change 2 to <2> to show lifting. -->
+
+<section data-example="interp">
+  <h3>Our new construct:<h3>
+  <h1>Materialization</h1>
+  <script type="text/example">
+var x = 2;
+< %[x] * 21 >
+  </script>
+</section>
+<!-- Add ! to show result of executing the opaque value. -->
+<!-- Perhaps show splicing being combined? -->
+
 </div>
 </div>
 

@@ -14,16 +14,16 @@ body {
   text-transform: none;
 }
 
+.reveal h4 strong {
+  color: #51a012;
+}
+
 .reveal h1 {
   line-height: 90%;
 }
 
 .reveal .title h2 {
   color: black;
-}
-
-.reveal .badges {
-  float: right;
 }
 
 .reveal section img {
