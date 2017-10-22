@@ -1,7 +1,12 @@
+body {
+  font-family: "Helvetica Neueue", "Helvetica", sans-serif;
+}
+
 .reveal h1, .reveal h2, .reveal h3 {
   text-align: left;
   text-transform: none;
   color: #51a012;
+  font-family: "Helvetica Neueue", "Helvetica", sans-serif;
 }
 
 .reveal h4 {
@@ -95,6 +100,8 @@
   font-weight: bold;
   color: #51a012;
   margin-top: -0.5rem;
+  margin-left: -2rem;
+  margin-right: 2rem;
 }
 
 /* Special style for GL mode. */
