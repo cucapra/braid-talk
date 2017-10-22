@@ -89,6 +89,16 @@ square(<3>)
 <!-- Then *add* a ! to show that the code value "works." -->
 <!-- Then change one to a string to show a type error. -->
 
+<section data-example="compile">
+  <script type="text/example">
+def genpow(x: <Int>, n: Int)
+  if (n == 1)
+    x
+    < [x] * [genpow(x, n - 1)] >;
+!genpow(<2>, 3)
+  </script>
+</section>
+
 </div>
 </div>
 
