@@ -189,8 +189,22 @@ render js<
 
 <section data-example="webgl">
   <script type="text/example" data-preamble="1">
+# Load buffers and parameters for the main model.
+var mesh = load_obj("bunny.obj");
+var pos = mesh_positions(mesh);
+var norm = mesh_normals(mesh);
+var indices = mesh_indices(mesh);
+var size = mesh_size(mesh);
+
+# The parameters for the Phong shader.
+var specular = 100.0;
+var light_color = vec3(0.32, 0.63, 0.07);
+var lightpos = vec3(20.0, 0.0, 20.0);
+
+# ---
+
 # Phong shader.
-def phong(pos: Float3 Buffer, norm: Float3 Buffer, model: Mat4, lightpos: Vec3, color: Vec3, specular: Float) (
+def phong(model: Mat4, matte: Float) (
   var camera_pos = eye(view);
 
   vertex glsl<
@@ -213,41 +227,39 @@ def phong(pos: Float3 Buffer, norm: Float3 Buffer, model: Mat4, lightpos: Vec3, 
       var spec_comp_b = max(0.0, dot(normal_world, angle));
       var spec_comp = pow( spec_comp_b, max(1.0, specular) ) * 2.0;
 
-      gl_FragColor = vec4(color * ndl + vec3(spec_comp), 1.0);
+      var out = if (matte == 1.0) (light_color * ndl) (light_color * ndl + vec3(spec_comp));
+      gl_FragColor = vec4(out, 1.0);
     >
   >;
 );
 
 # ---
 
-# Load buffers and parameters for the main model.
-var mesh = load_obj("bunny.obj");
-var position = mesh_positions(mesh);
-var normal = mesh_normals(mesh);
-var indices = mesh_indices(mesh);
-var size = mesh_size(mesh);
-
-# Position the model.
+# Position the models.
 var id = mat4.create();
-var model = mat4.create();
-mat4.translate(model, model, vec3(0.0, -10.0, 0.0));
-mat4.scale(model, model, vec3(10.0, 10.0, 10.0));
 
-# The parameters for the Phong shader.
-var specular = 100.0;
-var light_color = vec3(0.32, 0.63, 0.07);
-var light_position = vec3(20.0, 0.0, 20.0);
+var model1 = mat4.create();
+mat4.translate(model1, model1, vec3(0.0, 0.0, 0.0));
+mat4.scale(model1, model1, vec3(8.0, 8.0, 8.0));
+
+var model2 = mat4.create();
+mat4.translate(model2, model2, vec3(0.0, -12.0, 0.0));
+mat4.scale(model2, model2, vec3(8.0, 8.0, 8.0));
 
 # Rotation matrix.
 var rot = mat4.create();
   </script>
   <script type="text/example">
 render js<
-  # Rotation animation.
-  var t = Date.now();
-  mat4.rotateY(rot, id, t / 1000);
+  # Rotation.
+  mat4.rotateY(rot, id, Date.now() / 1000);
 
-  phong(position, normal, rot * model, light_position, light_color, specular);
+  # Lighting model with specular reflection.
+  phong(rot * model1, 0.0);
+  draw_mesh(indices, size);
+
+  # Without specular reflection (matte material).
+  phong(rot * model2, 1.0);
   draw_mesh(indices, size);
 >
   </script>
