@@ -499,20 +499,6 @@ var matte = 1.0;
   quote and then running it. This lets us splice values into our host and
   shader code alike. -->
 
-<section>
-  <h2>
-    Specializing on a compile-time parameter
-  </h2>
-  <p>
-    <code>gl_FragColor = if matte diffuse (diffuse + ...)</code>
-  </p>
-  <p>
-    <code>gl_FragColor = [ if matte &lt;diffuse&gt; (diffuse + ...) ]</code>
-  </p>
-</section>
-<!-- Then, using splices, we can use the compile-time parameter to eliminate
-  the spectral part of the lighting model. -->
-
 </div>
 </div>
 
