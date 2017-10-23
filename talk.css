@@ -56,6 +56,16 @@
   font-size: 80%;
 }
 
+.reveal section p.eq {
+  text-align: center;
+}
+
+/* Counteract Reveal's overriding KaTeX's math style. */
+.reveal span.math {
+  font: 400 1.21em KaTeX_Main, Times New Roman, serif;
+  line-height: 1.2;
+}
+
 .sscdingus {
   top: 2rem;
   bottom: 2rem;
