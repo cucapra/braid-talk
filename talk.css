@@ -65,6 +65,10 @@
   font: 400 1.21em KaTeX_Main, Times New Roman, serif;
   line-height: 1.2;
 }
+.reveal span.math.displaymath {
+  display: inline-block;
+  margin: 1rem 2rem;
+}
 
 .sscdingus {
   top: 2rem;

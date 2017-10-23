@@ -39,8 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Render math with KaTeX. We replace math in any <span class="math">.
-  for (let el of document.querySelectorAll('span.math')) {
-    katex.render(el.textContent, el);
+  for (var el of document.querySelectorAll('span.math')) {
+    var opts = {};
+    if (el.classList.contains("displaymath")) {
+      opts = {displayMode: true};
+    }
+    katex.render(el.textContent, el, opts);
   }
 
   var dingusEl = document.querySelector('.sscdingus');

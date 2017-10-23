@@ -205,8 +205,43 @@ square(<3>)
   </h4>
 
   <p class="eq">
-    <span class="math">\Gamma ::= \cdot \;|\; x : \tau, \Gamma</span>
+  <span class="math">\tau ::= \text{int} \;|\; \text{float} \;|\; \langle
+    \tau \rangle</span>
   </p>
+
+  <div class="fragment">
+    <p>
+      Per-stage environment stack:
+    </p>
+
+    <p class="eq">
+      <span class="math">\gamma ::= \cdot \;|\; x : \tau, \gamma</span>
+      <br>
+      <span class="math">\Gamma ::= \cdot \;|\; \gamma, \Gamma</span>
+    </p>
+  </div>
+
+  <div class="fragment">
+    <p>
+      Rules for quote and splice expressions:
+    </p>
+    <p class="eq">
+      <span class="math displaymath">
+        \frac{
+          \cdot,\, \Gamma \;\vdash\; e : \tau
+        }{
+          \Gamma \;\vdash\; \langle e \rangle : \langle \tau \rangle
+        }
+      </span>
+      <span class="math displaymath">
+        \frac{
+          \Gamma \;\vdash\; e : \langle\tau\rangle
+        }{
+          \gamma,\, \Gamma \;\vdash\; [ e ] : \tau
+        }
+      </span>
+    </p>
+  </div>
 </section>
 <!-- TODO Semantics here? -->
 
