@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Use ?number at the end of the URL to show slide numbers.
   var slideNumber = location.search.indexOf("number") !== -1;
 
+  // Initialize Reveal.
   Reveal.initialize({
     controls: false,
     progress: false,
@@ -36,6 +37,11 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     slideNumber: slideNumber,
   });
+
+  // Render math with KaTeX. We replace math in any <span class="math">.
+  for (let el of document.querySelectorAll('span.math')) {
+    katex.render(el.textContent, el);
+  }
 
   var dingusEl = document.querySelector('.sscdingus');
   var dingus = sscDingus(dingusEl, {

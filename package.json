@@ -7,6 +7,7 @@
   "dependencies": {
     "headjs": "^1.0.3",
     "highlight.js": "^9.12.0",
+    "katex": "^0.9.0-alpha1",
     "reveal.js": "^3.5.0"
   }
 }
