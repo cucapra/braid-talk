@@ -22,32 +22,42 @@
 
 <section data-example="webgl">
   <script type="text/example" data-preamble="1">
-var model = mat4.create();
-
 # Load buffers and parameters for the model.
-var mesh = load_obj("bunny.obj");
-var position = mesh_positions(mesh);
-var normal = mesh_normals(mesh);
+var mesh = load_obj("teapot.obj");
 var indices = mesh_indices(mesh);
 var size = mesh_size(mesh);
 
+# Position the model.
 var model = mat4.create();
-mat4.scale(model, model, vec3(8.0, 8.0, 8.0));
+mat4.translate(model, model, vec3(0.0, -3.0, 0.0));
+mat4.scale(model, model, vec3(0.3, 0.3, 0.3));
+mat4.rotateX(model, model, -1.0);
+
+var normal = mesh_normals(mesh);
+var tr = projection * view * model;
   </script>
   <script type="text/example">
+# Get the geometry for the teapot.
+var position = mesh_positions(mesh);
+
+# CPU render loop stage.
 render js<
- vertex glsl<
-  gl_Position = projection * view *
-   model * vec4(position, 1.0);
-  fragment glsl<
-   gl_FragColor =
-    vec4(abs(normal), 1.0);
-  >
- >;
- draw_mesh(indices, size);
+
+  # Vertex shader stage.
+  vertex glsl<
+    gl_Position = tr * vec4(position, 1.0);
+
+    # Fragment shader stage.
+    fragment glsl<
+      gl_FragColor = vec4(0.32, 0.63, 0.07, 1.0);
+    >
+  >;
+
+  draw_mesh(indices, size);
 >
   </script>
 </section>
+<!-- Change the colors to abs(normal). -->
 
 <section data-example="interp">
   <script type="text/example">
@@ -134,7 +144,7 @@ var x = 2;
   for reusable specialization strategies
   </p>
   <p class="footnote">
-    See the paper or <strong>braidgl.com</strong> for documentation.
+    See the paper or <strong>braidgl.com</strong> for details.
   </p>
 </section>
 
@@ -264,7 +274,106 @@ render js<
 >
   </script>
 </section>
-<!-- TODO: Show the actual computation! And make a specialization change? -->
+<!-- Not showing the actual shader, but there's an appearance parameter
+  here... -->
+
+<section data-example="webgl">
+  <script type="text/example" data-preamble="1">
+# Load buffers and parameters for the main model.
+var mesh = load_obj("bunny.obj");
+var pos = mesh_positions(mesh);
+var norm = mesh_normals(mesh);
+var indices = mesh_indices(mesh);
+var size = mesh_size(mesh);
+
+# The parameters for the Phong shader.
+var specular = 100.0;
+var light_color = vec3(0.32, 0.63, 0.07);
+var lightpos = vec3(20.0, 0.0, 20.0);
+
+# ---
+
+# Phong shader.
+def phong(model: Mat4, matte: Float) (
+  var camera_pos = eye(view);
+
+  vertex glsl<
+    gl_Position = projection * view * model * vec4(pos, 1.0);
+
+    fragment glsl<
+      # Convert to world space.
+      var position_world = vec3(model * vec4(pos, 1.0));
+      var normal_world = normalize(vec3(model * vec4(norm, 0.0)));
+      var view_dir_world = normalize(camera_pos - position_world);
+
+      # Light.
+      var light_direction = normalize(lightpos - position_world);
+
+      # Diffuse.
+      var ndl = vec3( max(0.0, dot(normal_world, light_direction)) );
+
+      # Specular.
+      var angle = normalize(view_dir_world + light_direction);
+      var spec_comp_b = max(0.0, dot(normal_world, angle));
+      var spec_comp = pow( spec_comp_b, max(1.0, specular) ) * 2.0;
+
+      var out = if (matte == 1.0) (light_color * ndl) (light_color * ndl + vec3(spec_comp));
+      gl_FragColor = vec4(out, 1.0);
+    >
+  >;
+);
+
+# ---
+
+# Position the models.
+var id = mat4.create();
+
+var model1 = mat4.create();
+mat4.translate(model1, model1, vec3(0.0, 0.0, 0.0));
+mat4.scale(model1, model1, vec3(8.0, 8.0, 8.0));
+
+var model2 = mat4.create();
+mat4.translate(model2, model2, vec3(0.0, -12.0, 0.0));
+mat4.scale(model2, model2, vec3(8.0, 8.0, 8.0));
+
+# Rotation matrix.
+var rot = mat4.create();
+  </script>
+  <script type="text/example">
+# Compile-time stage.
+var matte = 1.0;
+
+!<
+  # Run-time stage.
+  render js<
+    mat4.rotateY(rot, id, Date.now() / 1000);
+
+    phong(rot * model1, matte);
+    draw_mesh(indices, size);
+
+    phong(rot * model2, matte);
+    draw_mesh(indices, size);
+  >
+>
+  </script>
+</section>
+<!-- We can create a "compile-time stage" by moving our computation into a
+  quote and then running it. This lets us splice values into our host and
+  shader code alike. -->
+
+<section>
+  <h2>
+    Specializing on a compile-time parameter
+  </h2>
+  <p>
+    <code>gl_FragColor = if matte diffuse (diffuse + ...)</code>
+  </p>
+  <p>
+    <code>gl_FragColor = [ if matte &lt;diffuse&gt; (diffuse + ...) ]</code>
+  </p>
+</section>
+<!-- Then, using splices, we can use the compile-time parameter to eliminate
+  the spectral part of the lighting model. -->
 
 </div>
 </div>
