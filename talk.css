@@ -74,6 +74,12 @@
   margin: 1rem 2rem;
 }
 
+/* I can't believe this is the only way to disable the moronic animations when
+   building fragments in Reveal. */
+.reveal .slides section .fragment {
+  transition: none;
+}
+
 .sscdingus {
   top: 2rem;
   bottom: 2rem;
