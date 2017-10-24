@@ -247,7 +247,15 @@ square(<3>)
     </p>
   </div>
 </section>
-<!-- TODO Semantics here? -->
+<!--
+  * For every type, there is a *quoted* type that indicates programs that
+  produce values of that type.
+  * To write the semantics, we replace a typical typing context with a *stack*
+  of typing contexts. Little gamma is one context "frame", and big gamma is a
+  stack of per-stage contexts.
+  * When we write the semantics, this lets us push and pop type bindings
+  according to quote and escape expressions to wrap and unwrap quoted types.
+-->
 
 <section data-example="interp">
   <h2>Communication through literals</h2>
@@ -265,14 +273,14 @@ var x = 2;
   </h2>
   <script type="text/example">
 var x = 2;
-< %[x] * 21 >
+!< %[x] * 21 >
   </script>
 </section>
 <!-- Add ! to show result of executing the opaque value. -->
 <!-- Perhaps show splicing being combined? -->
 
 <section>
-  <h2>Also in Braid</h2>
+  <h2>Advanced Braid constructs</h2>
   <p>
     <strong>Multi-level</strong> escapes<br>
     for composing placement and specialization
@@ -286,7 +294,7 @@ var x = 2;
   for reusable specialization strategies
   </p>
   <p class="footnote">
-    See the paper or <strong>braidgl.com</strong> for details.
+    See the paper or the documentation at <strong>braidgl.com</strong>.
   </p>
 </section>
 
@@ -304,6 +312,7 @@ var x = 2;
 </section>
 
 <section data-example="webgl">
+  <h2>BraidGL</h2>
   <script type="text/example" data-preamble="1">
 # Load buffers and parameters for the model.
 var mesh = load_obj("teapot.obj");
@@ -340,6 +349,7 @@ render js<
 <!-- Change the colors to abs(normal). -->
 
 <section data-example="webgl">
+  <h2>Parameterized appearance</h2>
   <script type="text/example" data-preamble="1">
 # Load buffers and parameters for the main model.
 var mesh = load_obj("bunny.obj");
@@ -392,11 +402,11 @@ var id = mat4.create();
 
 var model1 = mat4.create();
 mat4.translate(model1, model1, vec3(0.0, 0.0, 0.0));
-mat4.scale(model1, model1, vec3(8.0, 8.0, 8.0));
+mat4.scale(model1, model1, vec3(7.0, 7.0, 7.0));
 
 var model2 = mat4.create();
 mat4.translate(model2, model2, vec3(0.0, -12.0, 0.0));
-mat4.scale(model2, model2, vec3(8.0, 8.0, 8.0));
+mat4.scale(model2, model2, vec3(7.0, 7.0, 7.0));
 
 # Rotation matrix.
 var rot = mat4.create();
@@ -420,6 +430,7 @@ render js<
   here... -->
 
 <section data-example="webgl">
+  <h2>Specialized appearance</h2>
   <script type="text/example" data-preamble="1">
 # Load buffers and parameters for the main model.
 var mesh = load_obj("bunny.obj");
@@ -472,11 +483,11 @@ var id = mat4.create();
 
 var model1 = mat4.create();
 mat4.translate(model1, model1, vec3(0.0, 0.0, 0.0));
-mat4.scale(model1, model1, vec3(8.0, 8.0, 8.0));
+mat4.scale(model1, model1, vec3(7.0, 7.0, 7.0));
 
 var model2 = mat4.create();
 mat4.translate(model2, model2, vec3(0.0, -12.0, 0.0));
-mat4.scale(model2, model2, vec3(8.0, 8.0, 8.0));
+mat4.scale(model2, model2, vec3(7.0, 7.0, 7.0));
 
 # Rotation matrix.
 var rot = mat4.create();
