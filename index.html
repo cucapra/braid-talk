@@ -52,7 +52,8 @@ render js<
 
     # Fragment shader stage.
     fragment glsl<
-      gl_FragColor = vec4(0.32, 0.63, 0.07, 1.0);
+      gl_FragColor =
+        vec4(0.32, 0.63, 0.07, 1.0);
     >
   >;
 
@@ -246,7 +247,8 @@ render js<
     gl_Position = tr * vec4(position, 1.0);
 
     fragment glsl<
-      gl_FragColor = vec4(0.32, 0.63, 0.07, 1.0);
+      gl_FragColor =
+        vec4(0.32, 0.63, 0.07, 1.0);
     >
   >;
 
@@ -322,13 +324,14 @@ var rot = mat4.create();
   <script type="text/example">
 render js<
   # Rotation.
-  mat4.rotateY(rot, id, Date.now() / 1000);
+  mat4.rotateY(rot, id,
+               Date.now() / 1000);
 
   # Lighting model with specular reflection.
   phong(rot * model1, 0.0);
   draw_mesh(indices, size);
 
-  # Without specular reflection (matte material).
+  # Without specular (matte material).
   phong(rot * model2, 1.0);
   draw_mesh(indices, size);
 >
@@ -407,7 +410,8 @@ var matte = 1.0;
 !<
   # Run-time stage.
   render js<
-    mat4.rotateY(rot, id, Date.now() / 1000);
+    mat4.rotateY(rot, id,
+                 Date.now() / 1000);
 
     phong(rot * model1, matte);
     draw_mesh(indices, size);
